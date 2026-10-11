@@ -1,16 +1,89 @@
 ---
+import SiteLayout from '../layouts/SiteLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<SiteLayout title="Feel good in your food">
+	<section class="hero">
+		<div class="hero-copy">
+			<p class="eyebrow">Nutrition, with heart</p>
+			<h1>Feel good in your food. <span class="accent">Feel good in you.</span></h1>
+			<p>No strict rules. No starting over on Monday. Just thoughtful, realistic nutrition that helps you feel like yourself again.</p>
+			<div class="hero-buttons">
+				<a class="button" href="/register">Let’s find your balance <span aria-hidden="true">↗</span></a>
+				<a class="text-link" href="#approach">Get to know me <span aria-hidden="true">→</span></a>
+			</div>
+			<div class="trust-row">
+				<div class="avatar-stack" aria-hidden="true"><span>J</span><span>M</span><span>A</span></div>
+				<span>Here for your real life, not a perfect one.</span>
+			</div>
+		</div>
+		<div class="hero-image-wrap">
+			<img class="hero-image" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1100&q=85" alt="A colorful, nourishing meal with fresh vegetables and grains" />
+			<div class="image-note"><strong>eat well</strong><span>live gently</span></div>
+		</div>
+	</section>
+
+	<section class="approach section-wrap" id="approach">
+		<p class="eyebrow">A softer kind of nutrition</p>
+		<h2>Healthy should feel <span class="accent">like you.</span></h2>
+		<p class="section-intro">Food is more than fuel, and your health is more than a number. We’ll make a plan that fits your body, your life, and the things you actually love.</p>
+		<div class="feature-grid">
+			<article class="feature">
+				<div class="feature-icon" aria-hidden="true">✳</div>
+				<h3>Personal, always</h3>
+				<p>Advice built around your needs, preferences, culture, and the rhythm of your everyday life.</p>
+			</article>
+			<article class="feature">
+				<div class="feature-icon" aria-hidden="true">♡</div>
+				<h3>Kind, never strict</h3>
+				<p>Leave guilt and food rules at the door. We focus on small changes that feel good and last.</p>
+			</article>
+			<article class="feature">
+				<div class="feature-icon" aria-hidden="true">⌁</div>
+				<h3>Made for real life</h3>
+				<p>Practical guidance for busy weeks, changing appetites, family dinners, and everything in between.</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="about-band" id="about">
+		<div class="about-photo" role="img" aria-label="A bright table set with a wholesome meal"></div>
+		<div class="about-copy">
+			<p class="eyebrow">A little about me</p>
+			<h2>Hi, I’m Lina. <span class="accent">So glad you’re here.</span></h2>
+			<p>I’m a registered dietitian who believes the best way to eat well is the way that works for you. Together, we’ll quiet the noise and find a more nourishing, more joyful way forward.</p>
+			<a class="text-link" href="/register">Let’s work together <span aria-hidden="true">→</span></a>
+		</div>
+	</section>
+
+	<section class="shop-preview section-wrap">
+		<div class="shop-preview-head">
+			<div><p class="eyebrow">A few good things</p><h2>Little helpers for <span class="accent">your everyday.</span></h2></div>
+			<a class="text-link" href="/shop">Visit the shop <span aria-hidden="true">→</span></a>
+		</div>
+		<div class="product-grid">
+			<article class="product-card">
+				<a class="product-image" href="/shop" aria-label="Browse the Everyday Nourish Guide"><span class="product-tag">Bestseller</span><img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80" alt="Fresh greens and colorful vegetables" loading="lazy" /></a>
+				<div class="product-info"><div><h3>The Everyday Nourish Guide</h3><p>A gentle guide to feeling your best</p></div><span class="product-price">$18</span></div>
+			</article>
+			<article class="product-card">
+				<a class="product-image" href="/shop" aria-label="Browse the Feel-Good Meal Planner"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=700&q=80" alt="A nourishing grain bowl with fresh ingredients" loading="lazy" /></a>
+				<div class="product-info"><div><h3>The Feel-Good Meal Planner</h3><p>Less wondering, more enjoying</p></div><span class="product-price">$12</span></div>
+			</article>
+			<article class="product-card">
+				<a class="product-image" href="/shop" aria-label="Browse the Pantry Reset"><span class="product-tag">New</span><img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=700&q=80" alt="Fresh pantry ingredients ready to prepare" loading="lazy" /></a>
+				<div class="product-info"><div><h3>The Pantry Reset</h3><p>Easy staples for a happier kitchen</p></div><span class="product-price">$9</span></div>
+			</article>
+		</div>
+	</section>
+
+	<section class="quote-band">
+		<blockquote>“For the first time, eating well feels like taking care of myself—not another thing I have to get right.”</blockquote>
+		<p>Jess, Goodkind client</p>
+	</section>
+
+	<section class="cta-band section-wrap">
+		<h2>Your next chapter can start <span class="accent">with one small step.</span></h2>
+		<a class="button" href="/register">Let’s talk <span aria-hidden="true">↗</span></a>
+	</section>
+</SiteLayout>

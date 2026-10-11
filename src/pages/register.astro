@@ -1,0 +1,38 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+
+<SiteLayout title="Create your account">
+	<section class="auth-page">
+		<div class="auth-aside">
+			<p class="eyebrow">A kinder way forward</p>
+			<h2>Let’s find a way of eating that feels like yours.</h2>
+			<p>No pressure to have it all figured out. We’ll take it one small step at a time.</p>
+		</div>
+		<div class="auth-panel">
+			<div class="auth-form-wrap">
+				<p class="eyebrow">Your goodkind space</p>
+				<h1>Let’s get started.</h1>
+				<p class="auth-intro">Create an account and take the first little step.</p>
+				<a class="auth-switch" href="/login">Log in</a>
+				<form class="auth-form" data-form="register">
+					<div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" placeholder="First and last name" required minlength="2" /></div>
+					<div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required /></div>
+					<div class="field"><label for="password">Create a password</label><input id="password" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" required minlength="8" /></div>
+					<button class="button auth-submit" type="submit">Create my account <span aria-hidden="true">↗</span></button>
+					<p class="form-notice" role="status" aria-live="polite"></p>
+					<p class="form-note">This is a website preview. Registration isn’t connected to an account service yet, and your details aren’t sent or stored.</p>
+				</form>
+			</div>
+		</div>
+	</section>
+	<script>
+		document.querySelectorAll<HTMLFormElement>('.auth-form').forEach((form) => {
+			form.addEventListener('submit', (event) => {
+				event.preventDefault();
+				const notice = form.querySelector<HTMLElement>('.form-notice');
+				if (notice) notice.textContent = 'You’re on your way! Account creation will be available once the site is connected to an account service.';
+			});
+		});
+	</script>
+</SiteLayout>

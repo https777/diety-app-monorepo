@@ -1,0 +1,76 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const products = [
+	{ name: 'The Everyday Nourish Guide', description: 'A gentle guide to feeling your best', price: 18, category: 'Guides', tag: 'Bestseller', image: 'photo-1547592180-85f173990554', alt: 'A colorful bowl of fresh greens and vegetables' },
+	{ name: 'The Feel-Good Meal Planner', description: 'Less wondering, more enjoying', price: 12, category: 'Planning', tag: '', image: 'photo-1490645935967-10de6ba17061', alt: 'A nourishing grain bowl with fresh ingredients' },
+	{ name: 'The Pantry Reset', description: 'Easy staples for a happier kitchen', price: 9, category: 'Guides', tag: 'New', image: 'photo-1543362906-acfc16c67564', alt: 'Fresh pantry ingredients ready to prepare' },
+	{ name: 'Five Days of Easy Lunches', description: 'Lunch, sorted for the week', price: 8, category: 'Recipes', tag: '', image: 'photo-1512621776951-a57141f2eefd', alt: 'A fresh salad with vegetables and grains' },
+	{ name: 'The Sunday Prep Cards', description: 'A little prep, a lot less stress', price: 14, category: 'Planning', tag: '', image: 'photo-1498837167922-ddd27525d352', alt: 'Fresh vegetables laid out for meal preparation' },
+	{ name: 'Comfort Food, Made Nourishing', description: 'Ten cozy recipes to come home to', price: 16, category: 'Recipes', tag: 'Reader favorite', image: 'photo-1476224203421-9ac39bcb3327', alt: 'A comforting homemade meal served at the table' },
+];
+---
+
+<SiteLayout title="The shop" description="Practical, feel-good nutrition guides, recipes, and meal-planning tools from Goodkind Nutrition.">
+	<section class="page-heading">
+		<p class="eyebrow">A little help, whenever you need it</p>
+		<h1>Good things for <span class="accent">everyday.</span></h1>
+		<p>Gentle guides, doable recipes, and small tools to make feeling good a little easier.</p>
+	</section>
+	<section class="shop-content section-wrap">
+		<div class="shop-toolbar">
+			<div class="category-list" role="group" aria-label="Filter products by category">
+				<button class="category-button" type="button" aria-pressed="true" data-category="All">All good things</button>
+				<button class="category-button" type="button" aria-pressed="false" data-category="Guides">Guides</button>
+				<button class="category-button" type="button" aria-pressed="false" data-category="Recipes">Recipes</button>
+				<button class="category-button" type="button" aria-pressed="false" data-category="Planning">Planning</button>
+			</div>
+			<span class="shop-count" aria-live="polite">{products.length} things to explore</span>
+		</div>
+		<div class="product-grid shop-products">
+			{products.map((product) => (
+				<article class="product-card" data-product-category={product.category}>
+					<div class="product-image">
+						{product.tag && <span class="product-tag">{product.tag}</span>}
+						<img src={`https://images.unsplash.com/${product.image}?auto=format&fit=crop&w=750&q=80`} alt={product.alt} loading="lazy" />
+					</div>
+					<div class="product-info">
+						<div><h3>{product.name}</h3><p>{product.description}</p></div>
+						<div><span class="product-price">${product.price}</span><br /><button class="add-to-cart" type="button" data-product={product.name}>Add to bag</button></div>
+					</div>
+				</article>
+			))}
+		</div>
+	</section>
+	<script>
+		const categoryButtons = document.querySelectorAll<HTMLButtonElement>('.category-button');
+		const productCards = document.querySelectorAll<HTMLElement>('[data-product-category]');
+		const shopCount = document.querySelector<HTMLElement>('.shop-count');
+		categoryButtons.forEach((button) => {
+			button.addEventListener('click', () => {
+				const category = button.dataset.category;
+				let visible = 0;
+				categoryButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+				productCards.forEach((card) => {
+					const show = category === 'All' || card.dataset.productCategory === category;
+					card.hidden = !show;
+					if (show) visible += 1;
+				});
+				if (shopCount) shopCount.textContent = `${visible} ${visible === 1 ? 'thing' : 'things'} to explore`;
+			});
+		});
+		document.querySelectorAll<HTMLButtonElement>('.add-to-cart').forEach((button) => {
+			button.addEventListener('click', () => {
+				const nextCount = Number(localStorage.getItem('goodkind-cart-count') || 0) + 1;
+				localStorage.setItem('goodkind-cart-count', String(nextCount));
+				window.dispatchEvent(new Event('goodkind-cart-updated'));
+				button.textContent = 'Added!';
+				button.setAttribute('aria-label', `${button.dataset.product} added to bag`);
+				window.setTimeout(() => {
+					button.textContent = 'Add to bag';
+					button.removeAttribute('aria-label');
+				}, 1400);
+			});
+		});
+	</script>
+</SiteLayout>
